@@ -255,9 +255,9 @@ QT_QPA_PLATFORM=offscreen venv/bin/python -m pytest --plugin=parsivel  # kit de 
 
 ## Documentação
 
-- [`../hidrolog/README.md`](../hidrolog/README.md): o app, a arquitetura e o funcionamento dos plugins.
-- [`../hidrolog/exemplos/plugin-termometro/COMO-CRIAR-UM-PLUGIN.md`](../hidrolog/exemplos/plugin-termometro/COMO-CRIAR-UM-PLUGIN.md): o contrato que este plugin implementa.
-- `parsivelreader`: leitura dos arquivos, classes de diâmetro e velocidade, eventos e gráficos.
+- [`https://github.com/eznoamd/hidrolog/`](https://github.com/eznoamd/hidrolog/): o app, a arquitetura e o funcionamento dos plugins.
+- [`https://github.com/eznoamd/hidrolog/blob/main/exemplos/plugin-termometro/COMO-CRIAR-UM-PLUGIN.md`](https://github.com/eznoamd/hidrolog/blob/main/exemplos/plugin-termometro/COMO-CRIAR-UM-PLUGIN.md): o contrato que este plugin implementa.
+- [`https://github.com/eznoamd/parsivelreader`](https://github.com/eznoamd/parsivelreader): leitura dos arquivos, classes de diâmetro e velocidade, eventos e gráficos.
 
 ## Licença
 
