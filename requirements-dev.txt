@@ -1,0 +1,12 @@
+# ambiente de desenvolvimento e testes do plugin (de dentro deste repositório):
+#   python3 -m venv venv && venv/bin/pip install -r requirements-dev.txt
+# os repositórios ficam lado a lado: ../hidrolog e ../parsivelreader
+-e ../hidrolog/backend
+-e ../hidrolog/design
+-e ../hidrolog/frontend
+-e ../parsivelreader
+-e .[interface]
+pytest
+pytest-qt
+httpx
+ 

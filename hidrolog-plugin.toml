@@ -1,0 +1,12 @@
+# Manifesto do plugin (lido sem executar codigo). Ver docs/como-criar-um-plugin.md.
+codigo = "parsivel"
+nome = "OTT Parsivel2"
+versao = "1.0.0"
+contrato = "1.x"
+autor = "Hidrolog"
+descricao = "Disdrômetro OTT Parsivel2 com datalogger XLink 500 (cartão SD): leituras, eventos de chuva, matriz D × V e diagnóstico."
+icone = "cloud-rain"
+modulo = "hidrolog_parsivel"
+requer = ["numpy", "netCDF4", "parsivelreader"]
+tabelas = ["parsivel_leitura"]
+cadastro = ["Intervalo de amostragem esperado", "Altura do feixe sobre o solo", "Versão do firmware", "Nº de série nas leituras"]

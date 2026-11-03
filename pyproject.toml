@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hidrolog-parsivel"
+version = "1.0.0"
+description = "Plugin do OTT Parsivel2 para o Hidrolog"
+requires-python = ">=3.10"
+dependencies = [
+    "hidrolog-backend",     # o nucleo (hidrolog_nucleo.plugin)
+    "parsivelreader @ git+https://github.com/eznoamd/parsivelreader.git@v1.0.0",
+    "numpy",
+    "netCDF4>=1.6",
+]
+
+[project.optional-dependencies]
+interface = ["PySide6>=6.6", "matplotlib>=3.8"]
+
+# o nucleo descobre o plugin por este entry point
+[project.entry-points."hidrolog.plugins"]
+parsivel = "hidrolog_parsivel:PLUGIN"
+
+[tool.setuptools.packages.find]
+include = ["hidrolog_parsivel*"]
+
+[tool.setuptools.package-data]
+"*" = ["amostra/**/*", "*.toml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+qt_api = "pyside6"
