@@ -1,7 +1,7 @@
 <h1 align="center">Hidrolog · plugin OTT Parsivel2</h1>
 
 <p align="center">
-Plugin do <a href="../hidrolog">Hidrolog</a> para o disdrômetro <b>OTT Parsivel2</b> com datalogger
+Plugin do <a href="https://github.com/eznoamd/hidrolog">Hidrolog</a> para o disdrômetro <b>OTT Parsivel2</b> com datalogger
 <b>XLink 500</b>: importa o cartão SD, confere a qualidade das leituras, mostra eventos de chuva e a
 matriz D × V e exporta em CSV e NetCDF.
 </p>
