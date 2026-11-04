@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "hidrolog-parsivel"
-version = "1.0.0"
+version = "1.0.1"
 description = "Plugin do OTT Parsivel2 para o Hidrolog"
 requires-python = ">=3.10"
 dependencies = [

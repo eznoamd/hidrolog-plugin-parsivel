@@ -23,7 +23,12 @@ Com o Hidrolog já instalado, o plugin entra pelo gerenciador de plugins do app:
 2. Escolha a origem:
    - **Repositório do GitHub**: o link (https://github.com/eznoamd/hidrolog-plugin-parsivel) e a versão (tag), por exemplo
      `v1.0.0`;
-   - **Do computador**: o `.zip` baixado da página de releases, ou a pasta dele descompactada.
+   - **Do computador**: o `hidrolog-plugin-parsivel-<versão>.zip` baixado da página de releases, ou
+     a pasta dele descompactada.
+
+   Os dois caminhos instalam o mesmo pacote: o `.zip` anexado à release, que já traz a
+   `parsivelreader` dentro. O botão "Source code" da release **não** serve, porque não tem a
+   biblioteca.
 3. Confira a confirmação (OTT Parsivel2, versão, contrato `1.x`, a tabela `parsivel_leitura` e os
    campos do cadastro) e digite a senha do master.
 4. **Reinicie o Hidrolog.** Na abertura, o app cria a tabela do plugin, com cópia de segurança do
@@ -37,8 +42,8 @@ Para usar:
    repositório (13 leituras reais de out/2026, uma delas corrompida).
 3. Abra o equipamento: as abas do plugin (abaixo), **Qualidade**, **Envios** e **Exportar**.
 
-O app recusa o plugin se não tiver as dependências dele: `numpy`, `netCDF4` e `parsivelreader`.
-Atualizar é o mesmo caminho com uma versão nova; desativar ou remover o plugin nunca apaga os dados.
+O plugin usa do app o `numpy`, o `netCDF4` e o `matplotlib`, que vêm no Hidrolog instalado; a
+`parsivelreader` vem dentro do pacote. Atualizar é o mesmo caminho com uma versão nova; desativar ou remover o plugin nunca apaga os dados.
 
 ## Visão geral
 
@@ -241,6 +246,22 @@ venv/bin/python -m app criar-master --login admin --nome "Admin"
 venv/bin/python -m hidrolog
 ```
 
+### Pacote de distribuição
+
+O app instalado não tem a `parsivelreader`, então o plugin é distribuído num `.zip` que a traz
+dentro, ao lado de `hidrolog_parsivel` (o gerenciador põe a raiz do plugin no caminho de
+importação). O repositório continua sem a cópia: o `.zip` é montado na hora da versão.
+
+```bash
+venv/bin/python empacotar.py      # dist/hidrolog-plugin-parsivel-<versão>.zip, com a parsivelreader do ambiente
+```
+
+O workflow `.github/workflows/pacote.yml` faz o mesmo a cada tag `v*` (ou à mão, em Actions →
+Pacote do plugin), baixando a `parsivelreader` do repositório de mesmo dono, e anexa o `.zip` à
+release. Antes de publicar a tag, atualize a `versao` no `hidrolog-plugin.toml` para o mesmo
+número. Se o repositório da `parsivelreader` for privado, crie um token com leitura nele e salve
+como secret `PARSIVELREADER_TOKEN`.
+
 ### Testes
 
 ```bash
@@ -252,6 +273,7 @@ QT_QPA_PLATFORM=offscreen venv/bin/python -m pytest --plugin=parsivel  # kit de 
   novo, nº de série), ida e volta dos vetores e da matriz, `buscar_dados` igual a `pr.concatenar`,
   leitura paralela, ficha, regras, CSV, NetCDF e rotas da API.
 - `tests/interface/`: as cinco abas na janela do Hidrolog.
+- `tests/test_empacotar.py`: o `.zip` de distribuição traz a `parsivelreader` e o manifesto não a exige do app.
 
 ## Documentação
 

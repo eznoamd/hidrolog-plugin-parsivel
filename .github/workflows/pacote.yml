@@ -1,0 +1,48 @@
+# Gera o pacote do plugin para o gerenciador do Hidrolog
+# (hidrolog-plugin-parsivel-<versão>.zip, com a parsivelreader dentro).
+# Roda à mão (Actions → Pacote do plugin → Run workflow) ou ao publicar uma tag v*,
+# que também anexa o .zip à release.
+
+name: Pacote do plugin
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  pacote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      # a parsivelreader vem do repositório de mesmo dono; se ele for privado, crie um
+      # token com leitura nele e salve como secret PARSIVELREADER_TOKEN
+      - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.repository_owner }}/parsivelreader
+          path: parsivelreader-src
+          token: ${{ secrets.PARSIVELREADER_TOKEN || github.token }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Gerar o .zip
+        run: python empacotar.py --parsivelreader parsivelreader-src/parsivelreader
+
+      - name: Guardar o pacote
+        uses: actions/upload-artifact@v4
+        with:
+          name: hidrolog-plugin-parsivel
+          path: dist/hidrolog-plugin-parsivel-*.zip
+
+      - name: Publicar na release (tags v*)
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/hidrolog-plugin-parsivel-*.zip
